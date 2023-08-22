@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-button (click)="logOut()" slot="end">
+      <ion-icon name="log-out-outline"></ion-icon>
+    </ion-button>
+    <ion-title>menu</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card (click)="menuUno()">
+    <h3>Menú uno</h3>
+  </ion-card>
+  <ion-card>
+    <h3>Menú dos</h3>
+  </ion-card>
+  <ion-card>
+    <h3>Menú tres</h3>
+  </ion-card>
+
+
+  <ion-button (click)="play()"> Play</ion-button>
+  <ion-button (click)="pause()"> Pause</ion-button>
+  <ion-button (click)="stop()"> Stop</ion-button> <!-- Con esto uno crea el boton que ejecuta la función de "play" a la animación. -->
+</ion-content>
