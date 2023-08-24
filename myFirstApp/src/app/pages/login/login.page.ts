@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HelperService } from 'src/app/services/helper.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ export class LoginPage implements OnInit {
   email:string = "";
   contrasena:string = "";
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private helperService:HelperService) { }
 
   ngOnInit() {
     
@@ -21,7 +22,9 @@ export class LoginPage implements OnInit {
 
   login(){
     if (this.email == "") {
-      alert("Debe ingresar un email.");
+      this.helperService.showAlert("Debe ingresar un email.", "Advertencia");
+      
+      
       return;
     }
     if (this.contrasena == "") {

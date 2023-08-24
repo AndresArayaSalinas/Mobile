@@ -2,8 +2,9 @@ import { ElementRef } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AnimationController, IonCard } from '@ionic/angular';
+import { AnimationController, IonCard, NavController } from '@ionic/angular';
 import type { Animation } from '@ionic/angular';
+import { Menu } from 'src/app/models/menu';
 
 @Component({
   selector: 'app-menu',
@@ -16,7 +17,44 @@ export class MenuPage implements OnInit, OnDestroy {
   private animation!: Animation;
 
 
-  constructor(private router:Router, private animationCtrl: AnimationController) { }
+
+
+menuArray:Menu[]=[];
+
+
+
+
+  constructor(private router:Router, private animationCtrl: AnimationController, private nav:NavController) { }
+
+
+cargarMenu(){
+  this.menuArray.push
+  (
+    {
+      id:1,
+      nombreMenu:"Menú uno",
+      url:"123456/menu-uno",
+      icono:"airplane"
+    },
+    {
+      id:2,
+      nombreMenu:"Menú Dos",
+      url:"menu-dos/987654",
+      icono:"alarm-outline"
+    }
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
   ngAfterViewInit() {
     this.animation = this.animationCtrl
       .create()
@@ -48,6 +86,9 @@ export class MenuPage implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.cargarMenu();
+    console.log("array menu", this.menuArray);
+    
     console.log("inicio del componente");
   }
 
@@ -78,6 +119,13 @@ export class MenuPage implements OnInit, OnDestroy {
   menuUno(){
     var parametroN1 = 123456;
     this.router.navigateByUrl(parametroN1 + "/menu-uno");
+  }
+
+
+  menuDos(){
+    var parIdMascota = 321;
+    this.nav.navigateForward("menu-dos/" + parIdMascota );
+
   }
 
 }
