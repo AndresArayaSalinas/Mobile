@@ -24,7 +24,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/menu-uno/menu-uno.module').then( m => m.MenuUnoPageModule)
   },
   {
-    path: 'menu-dos/:idMascota',
+    path: 'menu-dos',
     loadChildren: () => import('./pages/menu-dos/menu-dos.module').then( m => m.MenuDosPageModule)
   },
 

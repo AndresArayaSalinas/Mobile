@@ -1,10 +1,7 @@
-import { ElementRef } from '@angular/core';
-import { ViewChild } from '@angular/core';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AnimationController, IonCard, NavController } from '@ionic/angular';
+import { AnimationController, IonCard } from '@ionic/angular';
 import type { Animation } from '@ionic/angular';
-import { Menu } from 'src/app/models/menu';
 
 @Component({
   selector: 'app-menu',
@@ -13,44 +10,47 @@ import { Menu } from 'src/app/models/menu';
 })
 export class MenuPage implements OnInit, OnDestroy {
 
-  @ViewChild(IonCard, { read: ElementRef }) card!: ElementRef<HTMLIonCardElement>;
+  @ViewChild(IonCard, { read: ElementRef })
+  card!: ElementRef<HTMLIonCardElement>;
+
   private animation!: Animation;
 
 
 
 
-menuArray:Menu[]=[];
+  arrayMenu:any[]=[];
 
 
 
 
-  constructor(private router:Router, private animationCtrl: AnimationController, private nav:NavController) { }
 
 
-cargarMenu(){
-  this.menuArray.push
-  (
-    {
-      id:1,
-      nombreMenu:"Menú uno",
-      url:"123456/menu-uno",
-      icono:"airplane"
-    },
-    {
-      id:2,
-      nombreMenu:"Menú Dos",
-      url:"menu-dos/987654",
-      icono:"alarm-outline"
+
+
+
+  constructor(private router:Router, private animationCtrl: AnimationController) { }
+
+
+
+
+    cargarMenu(){
+      this.arrayMenu.push
+      (
+        {
+          id:1,
+          titulo:"Menú uno",
+          icono:"car-sport-outline",
+          url:"menu-uno",
+          disabled:true
+        },
+        {
+          id:2,
+          titulo:"Menú dos",
+          icono:"airplane",
+          url:"menu-dos"
+        }
+      )
     }
-  );
-}
-
-
-
-
-
-
-
 
 
 
@@ -58,38 +58,37 @@ cargarMenu(){
   ngAfterViewInit() {
     this.animation = this.animationCtrl
       .create()
-      .addElement(this.card.nativeElement)
+      .addElement(document.querySelectorAll("ion-card"))
       .duration(1500)
       .iterations(Infinity)
       .fromTo('transform', 'translateX(0px)', 'translateX(100px)')
       .fromTo('opacity', '1', '0.2');
   }
-                                                                                                                /* Todo este código desde Constructor hasta stop es para crear una animación para un botón 
-                                                                                                                .addElement(document.querySelectorAll("ion-card")) esto permite que todas las "ion card" ejecuten la animación*/
-  play() {
+
+
+
+  play(){
     this.animation.play();
   }
 
-  pause() {
+
+  pause(){
     this.animation.pause();
   }
 
-  stop() {
+  stop(){
     this.animation.stop();
   }
 
 
 
-  
   ngOnDestroy(): void {
     console.log("Destruyendo la vista");
   }
 
   ngOnInit() {
-    this.cargarMenu();
-    console.log("array menu", this.menuArray);
-    
     console.log("inicio del componente");
+    this.cargarMenu();
   }
 
   ionViewWillEnter(){
@@ -122,10 +121,8 @@ cargarMenu(){
   }
 
 
+
   menuDos(){
-    var parIdMascota = 321;
-    this.nav.navigateForward("menu-dos/" + parIdMascota );
-
+    this.router.navigateByUrl("menu-dos");
   }
-
 }

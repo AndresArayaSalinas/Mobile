@@ -1,6 +1,9 @@
 export interface Menu{
     id:number;
+    titulo:string;
+    icono:string;
     url:string;
-    nombreMenu:string;
-    icono?:string;
+    disabled?:boolean;
+
 }
+
