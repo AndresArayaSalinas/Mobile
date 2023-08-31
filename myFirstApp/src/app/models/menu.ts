@@ -4,6 +4,4 @@ export interface Menu{
     icono:string;
     url:string;
     disabled?:boolean;
-
 }
-

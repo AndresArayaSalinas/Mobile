@@ -1,8 +1,9 @@
 .box{
-    display:flex;
+    display: flex;
     justify-content: space-around;
     align-items: center;
 }
+
 
 .menuEnabled{
     background-color: green;
@@ -12,5 +13,19 @@
 .menuDisabled{
     background-color: red;
     color: white;
-    opacity: 50%;
+    opacity: 0.5;
+}
+
+.skeleton{
+   height: 50px;
+    width: 100%;
+    margin-top: 5%;
+    
+}
+
+.boxSkeleton{
+    display: flex;
+    justify-content: center;
+    padding-left: 10px;
+    padding-right: 10px;
 }

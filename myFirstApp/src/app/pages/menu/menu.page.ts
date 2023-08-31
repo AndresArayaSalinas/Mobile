@@ -2,6 +2,8 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { Router } from '@angular/router';
 import { AnimationController, IonCard } from '@ionic/angular';
 import type { Animation } from '@ionic/angular';
+import { Menu } from 'src/app/models/menu';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
   selector: 'app-menu',
@@ -15,42 +17,43 @@ export class MenuPage implements OnInit, OnDestroy {
 
   private animation!: Animation;
 
+  arrayMenu:Menu[]=[];
+
+  loading:boolean = true;
 
 
 
-  arrayMenu:any[]=[];
+  constructor(
+              private router:Router,
+              private animationCtrl: AnimationController,
+              private helper:HelperService) { }
+
+  cargarMenu(){
+    this.arrayMenu.push
+    (
+      {
+        id:1,
+        titulo:"Menú uno",
+        icono:"airplane-outline",
+        url:"/123/menu-uno",
+        disabled:true
+      },
+      {
+        id:2,
+        titulo:"Menú dos",
+        icono:"car-sport-outline",
+        url:"/menu-dos"
+      },
+      
+    )
+  }
 
 
 
+ simularCargaMenu = () => {
+  this.loading = false;
+ }
 
-
-
-
-
-
-  constructor(private router:Router, private animationCtrl: AnimationController) { }
-
-
-
-
-    cargarMenu(){
-      this.arrayMenu.push
-      (
-        {
-          id:1,
-          titulo:"Menú uno",
-          icono:"car-sport-outline",
-          url:"menu-uno",
-          disabled:true
-        },
-        {
-          id:2,
-          titulo:"Menú dos",
-          icono:"airplane",
-          url:"menu-dos"
-        }
-      )
-    }
 
 
 
@@ -89,6 +92,7 @@ export class MenuPage implements OnInit, OnDestroy {
   ngOnInit() {
     console.log("inicio del componente");
     this.cargarMenu();
+    setTimeout(this.simularCargaMenu, 4000);
   }
 
   ionViewWillEnter(){
@@ -110,8 +114,13 @@ export class MenuPage implements OnInit, OnDestroy {
 
 
 
-  logOut(){
-    this.router.navigateByUrl("login");
+  async logOut(){
+    
+    var confirmar = await this.helper.showConfir("Desea cerrar la sesión actual?","Confirmar", "Cancelar")
+    if (confirmar == true ) {
+      this.router.navigateByUrl("login");
+
+    }
   }
 
 

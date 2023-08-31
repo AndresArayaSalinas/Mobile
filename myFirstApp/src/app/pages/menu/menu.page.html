@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card (click)="menuUno()">
+  <!-- <ion-card (click)="menuUno()">
     <h3>Menú uno</h3>
   </ion-card>
   <ion-card (click)="menuDos()">
@@ -16,30 +16,36 @@
   </ion-card>
   <ion-card>
     <h3>Menú tres</h3>
-  </ion-card>
+  </ion-card> -->
 
-  <ng-container *ngFor="let menu of arrayMenu">
+    <ng-container *ngIf="!loading" >
+      <ng-container *ngFor="let menu of arrayMenu">
 
-    <ion-card class="menuEnabled" [routerLink]="menu.url" *ngIf="!menu.disabled">
-      <div class="box">
-      <ion-icon size="large" [name]="menu.icono"></ion-icon>
-      <h3>
-        {{menu.titulo}}
-      </h3>
-    </div>
-    </ion-card>
+        <ion-card class="menuEnabled" [routerLink]="menu.url" *ngIf="!menu.disabled">
+          <div class="box">
+            <ion-icon size="large" [name]="menu.icono"></ion-icon>
+            <h3>{{menu.titulo}}</h3>
+          </div>
+        </ion-card> 
 
-    <ion-card class="menuDisabled" *ngIf="menu.disabled">
-      <div class="box">
-      <ion-icon size="large" [name]="menu.icono"></ion-icon>
-      <h3>
-        {{menu.titulo}}
-      </h3>
-    </div>
-    </ion-card>
+         <ion-card class="menuDisabled" *ngIf="menu.disabled">
+          <div class="box">
+            <ion-icon size="large" [name]="menu.icono"></ion-icon>
+            <h3>{{menu.titulo}}</h3>
+          </div>
+        </ion-card> 
 
-  </ng-container>
-  
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="loading">
+      <div class="boxSkeleton" *ngFor="let item of [1,2,3,4,5]">
+        <ion-skeleton-text [animated]="true" class="skeleton"></ion-skeleton-text>
+       </div>
+    </ng-container>
+
+
+
 
   <ion-button (click)="play()">Play</ion-button>
   <ion-button (click)="pause()">Pause</ion-button>
